@@ -12,6 +12,7 @@ class TopMoviesOf::Scraper
   end
 
   def get_page_index(input)
+    @ranking = get_page(input).css("#top_movies_main .table .bold").text.to_i
     self.get_page(input).css(".table .unstyled article Link").text
   end 
 
@@ -25,7 +26,7 @@ class TopMoviesOf::Scraper
   def make_movies(input_name) 
     get_page_index(input).each do |movie| 
       get_single_movie(input_name)
-      TopMoviesOf::Movie.new(name = movie, score = @score, summary = @summary) #Make a movie class to create new instances per movie
+      TopMoviesOf::Movie.new(ranking = @ranking, name = movie, score = @score, summary = @summary) #Make a movie class to create new instances per movie
     end 
   end
 end 
