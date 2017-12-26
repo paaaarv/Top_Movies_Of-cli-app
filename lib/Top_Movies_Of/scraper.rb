@@ -38,7 +38,8 @@ class TopMoviesOf::Scraper
 
   def make_movies(input,input_name = nil)
     get_page_index(input).each do |movie|
-      TopMoviesOf::Movie.new(name = movie, score = @score, summary = @summary) #Make a movie class to create new instances per movie
+      binding.pry
+      TopMoviesOf::Movie.new(name = movie) #Make a movie class to create new instances per movie
     end
   end
 end
