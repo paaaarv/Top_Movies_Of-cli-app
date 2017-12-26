@@ -31,15 +31,18 @@ class TopMoviesOf::Scraper
 
   def get_single_movie(movie_name)
     page = get_single_movie_page(movie_name)
-    @score = page.css("#mainColumn #scorePanel .tomato-left .meter-value superPageFontColor").text.to_i
-    @summary = page.css("#mainColumn .media-body #movieSynopsis").text
+    @score = page.css("#all-critics-numbers .superPageFontColor").first.text
+    @summary = page.css("#movieSynopsis").text.lstrip
     #check out how to get Directed By, Genre, and Actors columns
   end
 
   def make_movies(input,input_name = nil)
+    x = 1
     get_page_index(input).each do |movie|
-      binding.pry
-      TopMoviesOf::Movie.new(name = movie) #Make a movie class to create new instances per movie
+      new_movie = movie.split(" (")
+      get_single_movie(new_movie[0])
+      TopMoviesOf::Movie.new(ranking = x,name = new_movie[0], score = @score, summary = @summary)
+      x+=1
     end
   end
 end
