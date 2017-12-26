@@ -4,8 +4,8 @@ class TopMoviesOf::CLI
   def call 
     puts "Hello, welcome to Top Movies Of!"
     puts "What year would you like to see the Top Movies Of?"
-    year = gets.strip.to_i 
-    TopMoviesOf::Scraper.#make scraper method in order to get Movie objects returned to this class
+    @year = gets.strip.to_i 
+    #make scraper method in order to get Movie objects returned to this class
     start
   end 
 

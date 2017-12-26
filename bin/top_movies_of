@@ -1,3 +1,5 @@
 #!/usr/bin/env ruby
 
+require_relative '../lib/Top_Movies_Of'
+
 TopMoviesOf::CLI.new.call
