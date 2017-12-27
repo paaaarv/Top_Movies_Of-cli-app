@@ -20,6 +20,7 @@ class TopMoviesOf::Movie
     self.all.each do |movie|
       if movie.ranking == input
         @name = movie.name
+        binding.pry
       end
     end
     TopMoviesOf::Scraper.new.get_single_movie(@name)

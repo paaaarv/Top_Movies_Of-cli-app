@@ -24,8 +24,9 @@ class TopMoviesOf::Scraper
   end
 
   def get_single_movie_page(name)
-    if url=get_page(@year).search('a').text_includes("#{name}").first
-      url_name = url.attributes["href"].value
+    if url=get_page(@year).search('td').text_includes("#{name}").first
+      attributes = url.search("a")
+      url_name = attributes.first.values.first
       Nokogiri::HTML(open("https://www.rottentomatoes.com#{url_name}"))
     end
   end
@@ -46,10 +47,12 @@ class TopMoviesOf::Scraper
   def make_movies(year) #makes movie objects from array of movie titles
     @year = year
     x = 1
-    get_movie_title(@year).each do |movie|
+    get_movie_title.each do |movie|
       format_movie = movie.split(" (")
       new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
-
+      get_single_movie(format_movie[0])
+      new_mov.summary = @summary
+      new_mov.score = @score
       x+=1
     end
   end

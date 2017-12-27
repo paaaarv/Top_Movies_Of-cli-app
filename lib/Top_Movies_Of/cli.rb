@@ -47,7 +47,7 @@ class TopMoviesOf::CLI
 
   def show_single_movie(input)
     movie = TopMoviesOf::Movie.find_movie(input)
-
+    binding.pry
     puts "Movie you selected: #{movie.name}"
     puts "Score: #{movie.score}"
     puts "Summary: #{movie.summary}"
