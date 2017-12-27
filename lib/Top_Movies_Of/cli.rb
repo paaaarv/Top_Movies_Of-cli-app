@@ -35,7 +35,7 @@ class TopMoviesOf::CLI
     else
       index = 20
     end
-    TopMoviesOf::Scraper.new.make_movies(@year, input)
+    TopMoviesOf::Scraper.new.make_movies(@year)
 
     #Movie method to find movies based on input
     TopMoviesOf::Movie.all[index..index+9].each do |movie|
@@ -46,7 +46,12 @@ class TopMoviesOf::CLI
   end
 
   def show_single_movie(input)
-    TopMoviesOf::Movie.find_movie(input)
+    movie = TopMoviesOf::Movie.find_movie(input)
+
+    puts "Movie you selected: #{movie.name}"
+    puts "Score: #{movie.score}"
+    puts "Summary: #{movie.summary}"
+    puts "-------------------------"
   end
 
 

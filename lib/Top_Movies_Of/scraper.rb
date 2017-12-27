@@ -9,12 +9,11 @@ class TopMoviesOf::Scraper
   end
 
   def get_page(year)
-    @year = year
     @doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=#{year}"))
   end
 
-  def get_movie_title(year)
-    get_title = get_page(year).css("td .articleLink")
+  def get_movie_title #gets an array of top movie titles
+    get_title = get_page(@year).css("td .articleLink")
     array = []
     x = 0
     while x <= 29 || x < get_title.length
@@ -32,27 +31,27 @@ class TopMoviesOf::Scraper
   end
 
   def get_single_movie(name)
-    if get_single_movie_page(name)
+    if get_single_movie_page(name) != nil
       page = get_single_movie_page(name)
       @score = page.css("#all-critics-numbers .superPageFontColor").first.text
       @summary = page.css("#movieSynopsis").text.lstrip
     else
-      not_working
+      puts "#{name} #{page}"
+      puts "Sorry, I cannot pull up information about this movie"
+      return nil
     end
     #check out how to get Directed By, Genre, and Actors columns
   end
 
-  def make_movies(year, input)
+  def make_movies(year) #makes movie objects from array of movie titles
+    @year = year
     x = 1
-    get_movie_title(year).each do |movie|
-      new_movie = movie.split(" (")
-      TopMoviesOf::Movie.new(ranking = x,name = new_movie[0], score = @score, summary = @summary)
+    get_movie_title(@year).each do |movie|
+      format_movie = movie.split(" (")
+      new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
+
       x+=1
     end
   end
 
-  def not_working
-    puts "Sorry, I cannot get information on this movie right now."
-    #new_cli = TopMoviesOf::CLI.(answer)
-  end
 end
