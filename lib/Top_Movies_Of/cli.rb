@@ -23,6 +23,7 @@ class TopMoviesOf::CLI
         if input > 3
           puts "Sorry, please enter 1,2, or 3 to see a list of top movies."
         end
+        show_movies(input)
       end
       puts "Which movie would you like to see more information on?"
       single_mov = gets.strip.to_i
@@ -55,10 +56,43 @@ class TopMoviesOf::CLI
   end
 
   def show_movies(input)
-    TopMoviesOf::Scraper.new.make_movies(@year)
-    #Movie method to find movies based on input
-    TopMoviesOf::Movie.find_movie(input)
+    TopMoviesOf::Scraper.new.make_movies(@year, input)
 
+    #Movie method to find movies based on input
+    if input == 1
+      x = 1
+      while x < 11
+        TopMoviesOf::Movie.all.each do |movie|
+
+          puts "Movie Ranking:   #{movie.ranking}"
+          puts "Movie Name:    #{movie.name}"
+          puts ""
+          x+=1
+        end
+      end
+    elsif input == 2
+      x = 11
+      while x < 21
+        TopMoviesOf::Movie.all.each do |movie|
+
+          puts "Movie Ranking:   #{movie.ranking}"
+          puts "Movie Name:    #{movie.name}"
+          puts ""
+          x+=1
+        end
+      end
+    else
+      x = 21
+      while x < 31
+        TopMoviesOf::Movie.all.each do |movie|
+
+          puts "Movie Ranking:   #{movie.ranking}"
+          puts "Movie Name:    #{movie.name}"
+          puts ""
+          x+=1
+        end
+      end 
+    end
   end
 
 end

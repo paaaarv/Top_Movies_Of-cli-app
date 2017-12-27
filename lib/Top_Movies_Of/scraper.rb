@@ -9,6 +9,7 @@ class TopMoviesOf::Scraper
   end
 
   def get_page(year)
+    @year = year
     @doc = Nokogiri::HTML(open("https://www.rottentomatoes.com/top/bestofrt/?year=#{year}"))
   end
 
@@ -23,19 +24,21 @@ class TopMoviesOf::Scraper
     return array
   end
 
-  def get_single_movie_page(year, name)
-    url_name=get_page(year).search('a').text_includes("#{name}").first.values[0]
+  def get_single_movie_page(name)
+    url=get_page(@year).search('a').text_includes("#{name}").first
+    url_name = url.attributes["href"].value.first
+    puts url_name
     Nokogiri::HTML(open("https://www.rottentomatoes.com#{url_name}"))
   end
 
-  def get_single_movie(year,name)
-    page = get_single_movie_page(year,name)
+  def get_single_movie(name)
+    page = get_single_movie_page(name)
     @score = page.css("#all-critics-numbers .superPageFontColor").first.text
     @summary = page.css("#movieSynopsis").text.lstrip
     #check out how to get Directed By, Genre, and Actors columns
   end
 
-  def make_movies(year)
+  def make_movies(year, input)
     x = 1
     get_movie_title(year).each do |movie|
       new_movie = movie.split(" (")
