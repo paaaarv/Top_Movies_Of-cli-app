@@ -35,9 +35,8 @@ class TopMoviesOf::Scraper
     #check out how to get Directed By, Genre, and Actors columns
   end
 
-  def make_movies(year, input)
+  def make_movies(year)
     x = 1
-
     get_movie_title(year).each do |movie|
       new_movie = movie.split(" (")
       TopMoviesOf::Movie.new(ranking = x,name = new_movie[0], score = @score, summary = @summary)
