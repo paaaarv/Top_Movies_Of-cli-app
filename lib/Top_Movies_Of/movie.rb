@@ -19,9 +19,10 @@ class TopMoviesOf::Movie
   def self.find_movie(input)
     self.all.each do |movie|
       if movie.ranking == input
-        return movie.name
+        @name = movie.name
       end
     end
+    TopMoviesOf::Scraper.new.get_single_movie(@name)
   end
 
 

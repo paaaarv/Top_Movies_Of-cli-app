@@ -23,6 +23,7 @@ class TopMoviesOf::CLI
         if input > 3
           puts "Sorry, please enter 1,2, or 3 to see a list of top movies."
         end
+        #need to validate to make sure there are enough movies - what to do if the year doesn't have 30 top movies?
         show_movies(input)
       end
       puts "Which movie would you like to see more information on?"
@@ -34,6 +35,7 @@ class TopMoviesOf::CLI
           single_mov = gets.strip.to_i
         end
       #add method to see the single movie information
+      show_single_movie(single_mov)
     elsif input == 2
       while single_mov <11 || single_mov > 20
         puts "Sorry, please enter a number 11-20."
@@ -48,6 +50,7 @@ class TopMoviesOf::CLI
         single_mov = gets.strip.to_i
       end
       #method to show movie
+      show_single_movie(single_mov)
     end
       puts "Would you like to see more ranked movies? Type 'Y' for yes, or any other letter for no."
       answer = gets.strip.to_s
@@ -67,10 +70,13 @@ class TopMoviesOf::CLI
     #Movie method to find movies based on input
     TopMoviesOf::Movie.all[index..index+9].each do |movie|
 
-      puts "Movie Ranking:   #{movie.ranking}"
-      puts "Movie Name:    #{movie.name}"
-      puts ""
+      puts "#{movie.ranking}.#{movie.name}"
+      puts "-----------------------------------"
     end
+  end
+
+  def show_single_movie(input)
+    TopMoviesOf::Movie.find_movie(input)
   end
 
 end

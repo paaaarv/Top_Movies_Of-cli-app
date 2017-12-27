@@ -26,8 +26,7 @@ class TopMoviesOf::Scraper
 
   def get_single_movie_page(name)
     url=get_page(@year).search('a').text_includes("#{name}").first
-    url_name = url.attributes["href"].value.first
-    puts url_name
+    url_name = url.attributes["href"].value
     Nokogiri::HTML(open("https://www.rottentomatoes.com#{url_name}"))
   end
 
