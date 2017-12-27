@@ -25,15 +25,20 @@ class TopMoviesOf::Scraper
   end
 
   def get_single_movie_page(name)
-    url=get_page(@year).search('a').text_includes("#{name}").first
-    url_name = url.attributes["href"].value
-    Nokogiri::HTML(open("https://www.rottentomatoes.com#{url_name}"))
+    if url=get_page(@year).search('a').text_includes("#{name}").first
+      url_name = url.attributes["href"].value
+      Nokogiri::HTML(open("https://www.rottentomatoes.com#{url_name}"))
+    end
   end
 
   def get_single_movie(name)
-    page = get_single_movie_page(name)
-    @score = page.css("#all-critics-numbers .superPageFontColor").first.text
-    @summary = page.css("#movieSynopsis").text.lstrip
+    if get_single_movie_page(name)
+      page = get_single_movie_page(name)
+      @score = page.css("#all-critics-numbers .superPageFontColor").first.text
+      @summary = page.css("#movieSynopsis").text.lstrip
+    else
+      not_working
+    end
     #check out how to get Directed By, Genre, and Actors columns
   end
 
@@ -44,5 +49,10 @@ class TopMoviesOf::Scraper
       TopMoviesOf::Movie.new(ranking = x,name = new_movie[0], score = @score, summary = @summary)
       x+=1
     end
+  end
+
+  def not_working
+    puts "Sorry, I cannot get information on this movie right now."
+    #new_cli = TopMoviesOf::CLI.(answer)
   end
 end

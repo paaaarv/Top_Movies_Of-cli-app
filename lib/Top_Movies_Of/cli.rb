@@ -9,7 +9,7 @@ class TopMoviesOf::CLI
     start
   end
 
-  def start
+  def start(answer = nil)
     answer = "y"
     input = 4
     while answer.downcase == "y"
