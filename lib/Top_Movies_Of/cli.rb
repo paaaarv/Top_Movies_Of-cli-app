@@ -49,49 +49,27 @@ class TopMoviesOf::CLI
       end
       #method to show movie
     end
-      show_movies(input)
       puts "Would you like to see more ranked movies? Type 'Y' for yes, or any other letter for no."
       answer = gets.strip.to_s
     end
   end
 
   def show_movies(input)
+    if input == 1
+      index = 0
+    elsif input == 2
+      index = 10
+    else
+      index = 20
+    end
     TopMoviesOf::Scraper.new.make_movies(@year, input)
 
     #Movie method to find movies based on input
-    if input == 1
-      x = 1
-      while x < 11
-        TopMoviesOf::Movie.all.each do |movie|
+    TopMoviesOf::Movie.all[index..index+9].each do |movie|
 
-          puts "Movie Ranking:   #{movie.ranking}"
-          puts "Movie Name:    #{movie.name}"
-          puts ""
-          x+=1
-        end
-      end
-    elsif input == 2
-      x = 11
-      while x < 21
-        TopMoviesOf::Movie.all.each do |movie|
-
-          puts "Movie Ranking:   #{movie.ranking}"
-          puts "Movie Name:    #{movie.name}"
-          puts ""
-          x+=1
-        end
-      end
-    else
-      x = 21
-      while x < 31
-        TopMoviesOf::Movie.all.each do |movie|
-
-          puts "Movie Ranking:   #{movie.ranking}"
-          puts "Movie Name:    #{movie.name}"
-          puts ""
-          x+=1
-        end
-      end 
+      puts "Movie Ranking:   #{movie.ranking}"
+      puts "Movie Name:    #{movie.name}"
+      puts ""
     end
   end
 
