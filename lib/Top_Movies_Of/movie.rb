@@ -2,7 +2,7 @@ class TopMoviesOf::Movie
 
   @@all = []
 
-  attr_accessor :name, :score, :ranking, :summary, :director, :actors, :genre #do i want all of these accessors? check the site for what's available to scrape
+  attr_accessor :name, :score, :ranking, :summary 
 
   def initialize(ranking = nil, name = nil, score = nil, summary = nil)
     @ranking = ranking

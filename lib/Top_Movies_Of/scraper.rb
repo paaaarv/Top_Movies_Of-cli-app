@@ -16,14 +16,12 @@ class TopMoviesOf::Scraper
     get_title = get_page(@year).css("td .articleLink")
     array = []
     x = 0
-    while x <= 29 || x < get_title.length
-      array << get_title[x].text.lstrip
-      x+=1
-    end
+    array << get_title[x].text.lstrip
+    x+=1
     return array
   end
 
-  def get_single_movie_page(name)
+  def get_single_movie_page(name) #scrape specific movie page 
     if url=get_page(@year).search('td').text_includes("#{name}").first
       attributes = url.search("a")
       url_name = attributes.first.values.first
@@ -59,10 +57,18 @@ class TopMoviesOf::Scraper
   def make_movies(year) #makes movie objects from array of movie titles
     @year = year
     x = 1
-    get_movie_title.each do |movie|
-      format_movie = movie.split(" (")
-      new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
-      x+=1
+    if get_movie_title.length > 50
+      get_movie_title[0..49].each do |movie|
+        format_movie = movie.split(" (")
+        new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
+        x+=1
+      end
+    else
+      get_movie_title.each do |movie|
+        format_movie = movie.split(" (")
+        new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
+        x+=1
+      end
     end
   end
 
