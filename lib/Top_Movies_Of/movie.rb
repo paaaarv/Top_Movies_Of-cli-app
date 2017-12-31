@@ -23,7 +23,6 @@ class TopMoviesOf::Movie
         return movie
       end
     end
-    #TopMoviesOf::Scraper.new.get_single_movie(@name)
   end
 
 

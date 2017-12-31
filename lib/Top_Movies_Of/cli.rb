@@ -26,7 +26,8 @@ class TopMoviesOf::CLI
   end
 
   def show_movies(input)
-    TopMoviesOf::Scraper.new.make_movies(@year)
+    @new_scraper = TopMoviesOf::Scraper.new
+    @new_scraper.make_movies(@year)
 
     #Movie method to find movies based on input
     TopMoviesOf::Movie.all.each do |movie|
@@ -37,8 +38,7 @@ class TopMoviesOf::CLI
   end
 
   def show_single_movie(input)
-    binding.pry
-    movie = TopMoviesOf::Scraper.add_attributes(input)
+    movie = @new_scraper.add_attributes(input)
     puts ""
     puts "Movie you selected: #{movie.name}"
     puts "Score: #{movie.score}"
@@ -46,21 +46,6 @@ class TopMoviesOf::CLI
     puts "-------------------------"
   end
 
-
-  def validate_input
-    while @input > 3
-      puts ""
-      puts "What ranking movies would you like to see?"
-      puts "1. 1-10"
-      puts "2. 11-20"
-      puts "3. 21-30"
-      @input = gets.strip.to_i
-      if @input > 3
-        puts "Sorry, please enter 1,2, or 3 to see a list of top movies."
-      end
-  end
-
-  def validate_single_mov
     if @input == 1
       while @single_mov <1 || @single_mov > 10
         puts "Sorry, please enter a number 1-10."

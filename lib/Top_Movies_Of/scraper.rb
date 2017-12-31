@@ -31,11 +31,23 @@ class TopMoviesOf::Scraper
     end
   end
 
-  def get_single_movie(name)
+  def get_movie_score(name)
     if get_single_movie_page(name) != nil
       page = get_single_movie_page(name)
       @score = page.css("#all-critics-numbers .superPageFontColor").first.text
+      return @score
+    else
+      puts "#{name} #{page}"
+      puts "Sorry, I cannot pull up information about this movie"
+      return nil
+    end
+  end
+
+  def get_movie_summary(name)
+    if get_single_movie_page(name) != nil
+      page = get_single_movie_page(name)
       @summary = page.css("#movieSynopsis").text.lstrip
+      return @summary
     else
       puts "#{name} #{page}"
       puts "Sorry, I cannot pull up information about this movie"
@@ -50,17 +62,17 @@ class TopMoviesOf::Scraper
     get_movie_title.each do |movie|
       format_movie = movie.split(" (")
       new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
-      #get_single_movie(format_movie[0])
-      new_mov.summary = @summary
-      new_mov.score = @score
       x+=1
     end
   end
 
-  def self.add_attributes(input)
+  def add_attributes(input) #adds score and summary for a single movie that is chosen
     movie = TopMoviesOf::Movie.find_movie(input)
-    get_single_movie(movie.name)
-    binding.pry
+    summary = get_movie_summary(movie.name)
+    score = get_movie_score(movie.name)
+    movie.summary = summary
+    movie.score = score
+    return movie
   end
 
 end
