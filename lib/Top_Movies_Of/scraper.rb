@@ -1,6 +1,5 @@
 require 'nokogiri'
 require 'open-uri'
-require 'pry'
 require 'nikkou'
 
 class TopMoviesOf::Scraper
@@ -15,13 +14,13 @@ class TopMoviesOf::Scraper
   def get_movie_title #gets an array of top movie titles
     get_title = get_page(@year).css("td .articleLink")
     array = []
-    x = 0
-    array << get_title[x].text.lstrip
-    x+=1
+    get_title.each do |title|
+      array << title.text.lstrip
+    end
     return array
   end
 
-  def get_single_movie_page(name) #scrape specific movie page 
+  def get_single_movie_page(name) #scrape specific movie page
     if url=get_page(@year).search('td').text_includes("#{name}").first
       attributes = url.search("a")
       url_name = attributes.first.values.first

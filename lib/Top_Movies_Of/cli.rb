@@ -11,10 +11,9 @@ class TopMoviesOf::CLI
 
   def start(answer = nil)
     @answer = "y"
-    @input = 4
     while @answer.downcase == "y"
         #need to validate to make sure there are enough movies - what to do if the year doesn't have 30 top movies?
-      show_movies(@input)
+      show_movies
       puts "Which movie would you like to see more information on?"
       @single_mov = gets.strip.to_i
       #method to show movie
@@ -24,10 +23,9 @@ class TopMoviesOf::CLI
     end
   end
 
-  def show_movies(input)
+  def show_movies
     @new_scraper = TopMoviesOf::Scraper.new
     @new_scraper.make_movies(@year)
-
     #Movie method to find movies based on input
     TopMoviesOf::Movie.all.each do |movie|
       puts ""
@@ -44,7 +42,7 @@ class TopMoviesOf::CLI
     puts "Score: #{movie.score}"
     puts ""
     puts "Summary: #{movie.summary}"
-    puts "" 
+    puts ""
     puts "-------------------------"
   end
 end

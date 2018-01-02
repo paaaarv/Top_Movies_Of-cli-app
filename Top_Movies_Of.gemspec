@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = TopMoviesOf::VERSION
   spec.authors       = ["'Parv Kumar'"]
   spec.email         = ["'parvathikumar92@gmail.com'"]
-
+  spec.files         = ["lib/Top_Movies_Of.rb"]
   spec.summary       = "Find Top Movies"
   spec.description   = "X"
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
