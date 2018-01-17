@@ -50,20 +50,13 @@ class TopMoviesOf::Scraper
       puts "Sorry, I cannot pull up information about this movie"
       return nil
     end
-    #check out how to get Directed By, Genre, and Actors columns
   end
 
   def make_movies(year) #makes movie objects from array of movie titles
     @year = year
     x = 1
-    if get_movie_title.length > 50
+    while x <= get_movie_title.length
       get_movie_title[0..49].each do |movie|
-        format_movie = movie.split(" (")
-        new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
-        x+=1
-      end
-    else
-      get_movie_title.each do |movie|
         format_movie = movie.split(" (")
         new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
         x+=1
