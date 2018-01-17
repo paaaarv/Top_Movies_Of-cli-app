@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.files         = ["lib/Top_Movies_Of.rb", "lib/Top_Movies_Of/cli.rb", "lib/Top_Movies_Of/movie.rb", "lib/Top_Movies_Of/scraper.rb", "lib/Top_Movies_Of/version.rb"]
   spec.summary       = "Find Top Movies"
   spec.description   = "X"
-  spec.homepage      = "https://github.com/paaaarv/Top_Movies_Of-cli-app"
+  spec.homepage      = "http://rubygems.org/gems/top-movies-of"
   spec.license       = "MIT"
   spec.executables << 'top_movies_of'
 
