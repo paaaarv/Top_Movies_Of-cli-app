@@ -8,20 +8,16 @@ Gem::Specification.new do |spec|
   spec.version       = TopMoviesOf::VERSION
   spec.authors       = ["'Parv Kumar'"]
   spec.email         = ["'parvathikumar92@gmail.com'"]
-  spec.files         = ["lib/Top_Movies_Of.rb"]
+  spec.files         = ["lib/Top_Movies_Of.rb", "lib/Top_Movies_Of/cli.rb", "lib/Top_Movies_Of/movie.rb", "lib/Top_Movies_Of/scraper.rb", "lib/Top_Movies_Of/version.rb"]
   spec.summary       = "Find Top Movies"
   spec.description   = "X"
   spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
+  spec.executables << 'top_movies_of'
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
+
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
     f.match(%r{^(test|spec|features)/})
