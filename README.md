@@ -1,5 +1,5 @@
 # Top Movies Of
-This gem provides the top Rotten Tomatoes rated movies of any given year based on user input. 
+This gem provides the top Rotten Tomatoes rated movies of any given year based on user input.
 
 
 ## Installation
@@ -7,7 +7,7 @@ This gem provides the top Rotten Tomatoes rated movies of any given year based o
 Add this line to your application's Gemfile:
 
 ```ruby
-gem install --dev Top_Movies_Of 
+gem install Top_Movies_Of 
 ```
 
 ## Usage
