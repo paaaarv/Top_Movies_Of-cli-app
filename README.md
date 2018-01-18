@@ -1,28 +1,17 @@
-# TopMoviesOf
+# Top Movies Of
+This gem provides the top Rotten Tomatoes rated movies of any given year based on user input. 
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/Top_Movies_Of`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'Top_Movies_Of'
+gem install --dev Top_Movies_Of 
 ```
 
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install Top_Movies_Of
-
 ## Usage
-
-TODO: Write usage instructions here
+Type in top_movies_of and follow the prompts in order to get the ratings/summary of the movie you choose.
 
 ## Development
 

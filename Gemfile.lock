@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    Top_Movies_Of (0.3.1)
+    Top_Movies_Of (0.3.4)
 
 GEM
   remote: https://rubygems.org/
