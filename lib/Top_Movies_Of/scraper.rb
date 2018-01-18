@@ -53,7 +53,7 @@ class TopMoviesOf::Scraper
     @year = year
     x = 1
     while x <= get_movie_title.length
-      get_movie_title[0..49].each do |movie|
+      get_movie_title.each do |movie|
         format_movie = movie.split(" (")
         new_mov = TopMoviesOf::Movie.new(ranking = x,name = format_movie[0])
         x+=1
