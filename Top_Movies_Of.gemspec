@@ -3,7 +3,7 @@ require "Top_Movies_Of/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "Top_Movies_Of"
-  spec.version       = TopMoviesOf::VERSION
+  spec.version       = "0.2.0"
   spec.authors       = ["'Parv Kumar'"]
   spec.email         = ["'parvathikumar92@gmail.com'"]
   spec.files         = ["lib/Top_Movies_Of.rb", "lib/Top_Movies_Of/cli.rb", "lib/Top_Movies_Of/movie.rb", "lib/Top_Movies_Of/scraper.rb", "lib/Top_Movies_Of/version.rb"]
